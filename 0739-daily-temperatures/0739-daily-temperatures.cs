@@ -1,7 +1,7 @@
 public class Solution {
     public int[] DailyTemperatures(int[] temperatures) {
         var length = temperatures.Length;
-        var stack = new Stack<(int, int)>();
+        var stack = new Stack<(int num, List<int> js)>();
         var answer = new int[length];
 
         for (var i = 0; i < length - 1; i++)
@@ -12,20 +12,19 @@ public class Solution {
             if (current < next)
             {
                 answer[i] = 1;
-                while(stack.TryPop(out var pair))
+                while(stack.Any() && stack.Peek().num < next)
                 {
-                    var (number, j) = pair;
-                    if (number < next)
+                    foreach (var j in stack.Pop().js)
                         answer[j] = i - j + 1;
-                    else
-                    {
-                        stack.Push((number, j));
-                        break;
-                    }
                 }
             }
             else
-                stack.Push((current, i));
+            {
+                if (stack.Any() && stack.Peek().num == current)
+                    stack.Peek().js.Add(i);
+                else
+                    stack.Push((current, new List<int> { i }));
+            }
         }
 
         return answer;
