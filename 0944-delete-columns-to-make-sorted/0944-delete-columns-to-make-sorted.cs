@@ -13,7 +13,7 @@ public class Solution {
                     answer++;
                     break;
                 }
-                previousCharacter = strs[i][j];
+                previousCharacter = currentCharacter;
             }
         }
         
