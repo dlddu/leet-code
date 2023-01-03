@@ -1,19 +1,17 @@
 public class Solution {
     public int MinDeletionSize(string[] strs) {
-        var current = strs[0];
-        var sorted = Enumerable.Range(0, current.Length).ToList();
+        var answer = 0;
         
-        foreach (var str in strs.Skip(1))
+        for (var j = 0; j < strs[0].Length; j++)
+        for (var i = 1; i < strs.Length; i++)
         {
-            foreach (var index in sorted.ToArray())
+            if (strs[i-1][j] > strs[i][j])
             {
-                if (current[index] > str[index])
-                    sorted.Remove(index);
+                answer++;
+                break;
             }
-            if (!sorted.Any()) return current.Length;
-            current = str;
         }
         
-        return current.Length - sorted.Count;
+        return answer;
     }
 }
