@@ -10,6 +10,7 @@ public class Solution {
                 if (current[index] > str[index])
                     sorted.Remove(index);
             }
+            if (!sorted.Any()) return current.Length;
             current = str;
         }
         
