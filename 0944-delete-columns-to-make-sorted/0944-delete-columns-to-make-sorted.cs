@@ -3,12 +3,17 @@ public class Solution {
         var answer = 0;
         
         for (var j = 0; j < strs[0].Length; j++)
-        for (var i = 1; i < strs.Length; i++)
         {
-            if (strs[i-1][j] > strs[i][j])
+            var previousCharacter = strs[0][j];
+            for (var i = 1; i < strs.Length; i++)
             {
-                answer++;
-                break;
+                var currentCharacter = strs[i][j];
+                if (previousCharacter > currentCharacter)
+                {
+                    answer++;
+                    break;
+                }
+                previousCharacter = strs[i][j];
             }
         }
         
