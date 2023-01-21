@@ -6,8 +6,7 @@ public class Solution {
         for (var i = 1; i < prices.Length; i++)
         {
             beforeProfit = Math.Max(beforeProfit + prices[i] - prices[i-1], 0);
-            if (beforeProfit > max)
-                max = beforeProfit;
+            max = Math.Max(beforeProfit, max);
         }
         
         return max;
