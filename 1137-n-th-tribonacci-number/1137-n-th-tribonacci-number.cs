@@ -11,8 +11,13 @@ public class Solution {
         var second = 1;
         var third = 1;
         
-        for (var i = 3; i < n; i++)
-            (first, second, third) = (second, third, first + second + third);
+        for (var i = 3; i < n; i++)   
+        {
+            var temp = first + second + third;
+            first = second;
+            second = third;
+            third = temp;
+        }
         
         return first + second + third;
     }
