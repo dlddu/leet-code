@@ -3,23 +3,26 @@ public class Solution {
         if (n == 1)
             return trust.Any() ? -1 : 1;
         
-        var dict = new Dictionary<int, List<int>>();
-        var notCand = new bool[n];
+        var trustCount = new int[n + 1];
+        var trustAny = new bool[n + 1];
+        var passed = new List<int>();
         
         foreach (var t in trust)
         {
-            if (!dict.ContainsKey(t[1]))
-                dict[t[1]] = new List<int>();
-            dict[t[1]].Add(t[0]);
+            var a = t[0];
+            var b = t[1];
             
-            notCand[t[0] - 1] = true;
+            trustCount[b]++;
+            trustAny[a] = true;
+            
+            if (trustCount[b] == n-1)
+            {
+                if (passed.Any()) return -1;
+                passed.Add(b);
+            }
         }
-        
-        var mostTrusted = dict.Where(kv => kv.Value.Count() == n - 1);
-        
-        if (mostTrusted.Count() != 1) return -1;
-        var maybe = mostTrusted.Single().Key;
-        if (notCand[maybe - 1]) return -1;
+        var maybe = passed.SingleOrDefault();
+        if (maybe == 0 || trustAny[maybe]) return -1;
         
         return maybe;
     }
