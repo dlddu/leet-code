@@ -18,7 +18,7 @@ public class Solution {
     
     private IList<int> traverse(TreeNode node)
     {
-        if (node == null) return new List<int>();
+        if (node == null) return Array.Empty<int>();
         return traverse(node.left).Concat(visit(node)).Concat(traverse(node.right)).ToList();
     }
     
