@@ -12,22 +12,26 @@
  * }
  */
 public class Solution {
-    private int max = 0;
-    private int cur = 0;
     public int MaxDepth(TreeNode root) {
-        if (root == null) return 0;
+        if (root == null)
+            return 0;
         
-        rec(root);
+        var stack = new Stack<(TreeNode node, int depth)>();
+        stack.Push((root, 1));
+        
+        var max = 0;
+        
+        while (stack.TryPop(out var pair))
+        {
+            var (node, depth) = pair;
+            max = Math.Max(max, depth);
+            
+            if (node.left != null)
+                stack.Push((node.left, depth + 1));
+            if (node.right != null)
+                stack.Push((node.right, depth + 1));
+        }
+        
         return max;
-    }
-    
-    private void rec(TreeNode root)
-    {
-        max = Math.Max(max, ++cur);
-        if (root.left != null)
-            rec(root.left);
-        if (root.right != null)
-            rec(root.right);
-        cur--;
     }
 }
