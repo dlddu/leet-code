@@ -1,5 +1,7 @@
 public class Solution {
     public string GcdOfStrings(string str1, string str2) {
+        if (str1 == str2) return str1;
+        
         var (shortString, longString) = GetCompare(str1, str2);
         
         while (longString.Length != shortString.Length)
@@ -9,7 +11,7 @@ public class Solution {
             (shortString, longString) = GetCompare(shortString, longString.Substring(0, temp));
         }
         
-        return IsDivided(longString, shortString) && IsDivided(str1, shortString) && IsDivided(str2, shortString) ? shortString : "";
+        return "";
     }
     
     private bool IsDivided(string longString, string shortString)
